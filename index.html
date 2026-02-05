@@ -4257,10 +4257,9 @@
                     
                 }
 
-                const data = await response.json();
                 
-                if (!response.ok) {
-                    showNotification(data.message, "error")                    
+                if (!response.ok) {                    
+                    // showNotification(response.statusText, "error")                    
                     throw new Error('Failed to save player');
                 }
                 
@@ -4276,21 +4275,23 @@
                     players.push(savedPlayer);
                 }
                 
-                closeModal();
-                renderPlayersTable();
-                renderPlayersGridView();
-                renderPlayersForAttendance();
-                await renderTopAttendees();
-                await updateStats();
+                
                 
                 // Refresh attendance history if on that tab
                 if (document.getElementById('attendance-history-tab').classList.contains('active')) {
                     loadAttendanceHistory();
                 }
                 
-                showNotification(editingPlayerId ? 'Player updated successfully!' : 'Player added successfully!', 'success');
+                await showNotification(editingPlayerId ? 'Player updated successfully!' : 'Player added successfully!', 'success');
+
+                closeModal();
+                renderPlayersTable();
+                renderPlayersGridView();
+                renderPlayersForAttendance();
+                await renderTopAttendees();
+                await updateStats();
             } catch (error) {
-                console.error('Failed to save player:', error);
+                console.error('Failed to save player:', error.message);
                 showNotification('Failed to save player', 'error');
             } finally {
                 const saveBtn = document.querySelector('.save-btn');
