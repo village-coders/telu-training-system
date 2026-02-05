@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#1e3c72">
     <meta name="mobile-web-app-capable" content="yes">
-    <title>Pro Football Training Attendance System</title>
+    <title>TELU FC Football Training Attendance System</title>
     <link rel="shortcut icon" href="telu logo png.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2708,8 +2708,8 @@
         </div>
         
         <div class="dashboard-footer">
-            <p>© 2024 Pro Football Training System • Professional football club management platform</p>
-            <p style="margin-top: 5px; font-size: 0.8rem;">All data is securely stored in your browser's local storage</p>
+            <p>© <span id="currentYear"></span> TELU FC Football Training System • Professional football club management platform</p>
+            <a target="_blank" href="https://www.theyoungpioneers.com">Build by theyoungpioneers</a>
         </div>
     </div>
     
@@ -2843,6 +2843,11 @@
                     }
                 }, { passive: false });
             }
+
+
+            const currentYear = new Date().getFullYear();
+            document.getElementById('currentYear').textContent = currentYear;
+
             
             // Handle viewport height on mobile browsers
             function setVH() {
