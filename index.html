@@ -2381,7 +2381,7 @@
                     <div class="user-avatar" id="user-avatar">C</div>
                     <div>
                         <div id="user-name">Coach Alex Ferguson</div>
-                        <div style="font-size: 0.85rem; opacity: 0.9;">Head Coach</div>
+                        <div id="position" style="font-size: 0.85rem; opacity: 0.9;">Head Coach</div>
                     </div>
                 </div>
                 <button class="logout-btn" id="logout-btn">
@@ -2873,6 +2873,16 @@
             
             // Set current date
             updateCurrentDate();
+
+            function detectRoles(){
+                if(currentUser.role !== "coach"){
+                    document.getElementById("add-player-btn").style.display = "none";
+                    document.getElementById("player-action-btn").disabled = true;
+                    document.getElementById("save-attendance-btn").disabled = true;
+                }
+            }
+
+            detectRoles()
         });
         
         // API helper functions
@@ -2936,6 +2946,7 @@
             // Update user info from localStorage
             if (currentUser) {
                 document.getElementById('user-name').textContent = currentUser.name;
+                document.getElementById('position').textContent = currentUser.position;
                 document.getElementById('user-avatar').textContent = currentUser.name.charAt(0);
             }
             
@@ -3543,7 +3554,7 @@
                             <span>${player.alwaysAvailable ? 'Always Available' : 'Available on Request'}</span>
                         </div>
                     </div>
-                    <button class="player-action-btn" data-player-id="${player._id}">
+                    <button class="player-action-btn" id="player-action-btn" data-player-id="${player._id}">
                         <i class="fas fa-edit"></i>
                     </button>
                     <div class="attendance-modal" id="modal-${player._id}">
